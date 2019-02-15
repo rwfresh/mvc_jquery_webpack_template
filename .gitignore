@@ -1,0 +1,4 @@
+/ClientApp/node_modules
+/ClientApp/package-lock.json
+/bin
+/.vs
