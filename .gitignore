@@ -1,9 +1,8 @@
-/ClientApp/node_modules
+ClientApp/node_modules
+/
+ClientApp/package-lock.json
 
-/ClientApp/package-lock.json
-
-/bin
-
-/obj
-/wwwroot/dist
-.vs
+bin/
+obj/
+wwwroot/dist/
+.vs/
