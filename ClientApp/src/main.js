@@ -14,7 +14,6 @@ import 'bootstrap';
 //Add a namspace
 window.MyWebApp = {};
 
-
 var Routes = {
     Home: {
         init: function () {
@@ -52,9 +51,9 @@ var Router = {
     }
 };
 
-$(function () {
-    //run this when the DOM is ready
-    Router.init();
-});
+
+//run this immediately
+Router.init();
+
 
 
