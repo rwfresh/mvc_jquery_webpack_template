@@ -9,7 +9,18 @@ module.exports = (env = {}, argv = {}) => {
 
     const config = {
         mode: argv.mode || 'development', // we default to development when no 'mode' arg is passed
-
+        devServer: {
+            compress: isProd,
+            overlay: {
+                warnings: true,
+                errors: true
+            }
+            //  , historyApiFallback: true
+            , noInfo: true
+        },
+        cache: isProd,
+        // generate source map
+        devtool: !isProd ? 'cheap-module-source-map' : false,
         optimization: {
             minimize: true
         },
