@@ -46,7 +46,7 @@ namespace mvc_jquery_webpack_template
                 {
                     ProjectPath = Path.Combine(Directory.GetCurrentDirectory(), "ClientApp"),
                     HotModuleReplacement = true,
-                    HotModuleReplacementEndpoint = "/dist/__webpack_hmr"
+                    HotModuleReplacementEndpoint = "/__webpack_hmr"
                     
                 });
                 app.UseDeveloperExceptionPage();
