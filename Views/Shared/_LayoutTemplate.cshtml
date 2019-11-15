@@ -7,6 +7,9 @@
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <link href="<%= htmlWebpackPlugin.files.chunks[chunk].css %>" rel="stylesheet" />
     <% } %>
+    @*<% for (var css in htmlWebpackPlugin.files.css) { %>
+        <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+        <% } %>*@
 
 </head>
 <body data-controller="@ViewContext.RouteData.Values["Controller"]" data-action="@ViewContext.RouteData.Values["Action"]">
@@ -50,6 +53,9 @@
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %>
+    @*<% if (htmlWebpackPlugin.options.devServer) { %>
+        <script src="<%= htmlWebpackPlugin.options.devServer%>/webpack-dev-server.js"></script>
+        <% } %>*@
 
     @RenderSection("Scripts", required: false)
 </body>
