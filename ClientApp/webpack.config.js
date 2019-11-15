@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const rootDir = path.resolve(__dirname, '../');
 module.exports = (env = {}, argv = {}) => {
 
     const isProd = argv.mode === 'production';
@@ -33,9 +33,9 @@ module.exports = (env = {}, argv = {}) => {
                 minRatio: 0.8
             }),
             new HtmlWebpackPlugin({
-                template: '_LayoutTemplate.cshtml',
-                filename: '../../Views/Shared/_Layout.cshtml', //the output root here is /wwwroot/dist so we ../../      
-                inject: false
+                    filename: path.resolve(rootDir, 'Views/Shared/_Layout.cshtml'),
+                    template: path.resolve(rootDir, 'Views/Shared/_LayoutTemplate.cshtml'),
+                    inject: true
             })
         ],
         module: {
