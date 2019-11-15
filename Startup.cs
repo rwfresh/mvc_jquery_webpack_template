@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using System.IO;
 using Microsoft.Extensions.Hosting;
+using Westwind.AspNetCore.LiveReload;
+using Microsoft.AspNetCore.Mvc;
 
 namespace mvc_jquery_webpack_template
 {
@@ -22,6 +24,8 @@ namespace mvc_jquery_webpack_template
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLiveReload();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -29,7 +33,8 @@ namespace mvc_jquery_webpack_template
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation(); 
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddMvc().AddRazorRuntimeCompilation().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,12 +43,10 @@ namespace mvc_jquery_webpack_template
         {
             if (env.IsDevelopment())
             {
+                app.UseLiveReload();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    ProjectPath = Path.Combine(Directory.GetCurrentDirectory(), "ClientApp"),
-                    HotModuleReplacement = true,
-                    HotModuleReplacementEndpoint = "/__webpack_hmr"
-                    
+                    HotModuleReplacement = true
                 });
                 app.UseDeveloperExceptionPage();
             }
