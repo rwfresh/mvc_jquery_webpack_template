@@ -13,7 +13,7 @@ import 'bootstrap';
 
 //Add a namspace
 window.MyWebApp = {};
-
+alert('!!!')
 var Routes = {
     Home: {
         init: function () {
