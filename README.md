@@ -1,6 +1,6 @@
-# ASP.Net MVC (Core 2.2)— No SPA with Webpack 4, jQuery, Bootstrap, Babel 7
+# ASP.Net MVC (Core 3.0)— No SPA with Webpack 4, jQuery, Bootstrap, Babel 
 
-This is a sample ASP.Net MVC Core 2.2 project/template with Webpack 4, jQuery, Bootstrap, font-awesome and Babel.
+This is a sample ASP.Net MVC Core 3.0 project/template with Webpack 4, jQuery, Bootstrap, font-awesome and Babel.
 
 This is not a SPA but rather suggests an approach to utilizing webpack and babel for none SPA projects.
 

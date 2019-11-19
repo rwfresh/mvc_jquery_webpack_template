@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using System.IO;
+using Microsoft.Extensions.Hosting;
+using Westwind.AspNetCore.LiveReload;
+using Microsoft.AspNetCore.Mvc;
 
 namespace mvc_jquery_webpack_template
 {
@@ -26,6 +24,8 @@ namespace mvc_jquery_webpack_template
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLiveReload();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -33,21 +33,20 @@ namespace mvc_jquery_webpack_template
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            services.AddMvc().AddRazorRuntimeCompilation().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        [Obsolete]
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
+                app.UseLiveReload();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
-                    ProjectPath = Path.Combine(Directory.GetCurrentDirectory(), "ClientApp"),
-                    HotModuleReplacement = true,
-                    HotModuleReplacementEndpoint = "/dist/__webpack_hmr"
-                    
+                    HotModuleReplacement = true
                 });
                 app.UseDeveloperExceptionPage();
             }
@@ -60,13 +59,14 @@ namespace mvc_jquery_webpack_template
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseCookiePolicy();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

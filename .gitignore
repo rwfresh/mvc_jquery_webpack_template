@@ -5,3 +5,5 @@ obj/
 wwwroot/dist/
 .vs/
 mvc_jquery_webpack_template.csproj.user
+/Views/Shared/_Layout.cshtml
+/node_modules
